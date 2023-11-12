@@ -1,20 +1,25 @@
 // app.ts
-
 import express, { Request, Response } from 'express';
 import path from 'path';
 import { upload, removeFile, replaceFile } from './utils/upload';
 
 const app = express();
 const port = process.env.PORT || 5000;
+// Add this line to serve the uploads directory statically
+// app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Upload endpoint
 app.post('/upload', upload.single('image'), (req: Request, res: Response) => {
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
   }
+// console.log({req});
+  const imagePath = `uploads/${req.file.filename}`;
+  const fullUrl = `${req.protocol}://${req.get('host')}/${imagePath}`;
 
-  const imagePath = path.join(__dirname, 'uploads', req.file.filename);
-  res.json({ imagePath: imagePath });
+  res.json({ imagePath: fullUrl });
+//   res.json({ imagePath: imagePath });
 });
 
 // Remove endpoint
@@ -45,6 +50,9 @@ app.put('/replace/:filename', upload.single('image'), async (req: Request, res: 
   }
 });
 
+app.get("/", (req,res)=>{
+res.json({msg: "Hello there"})
+})
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

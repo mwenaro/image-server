@@ -13,7 +13,7 @@ interface MulterFile {
   size: number;
 }
 
-const uploadsDirectory = path.join(__dirname, 'uploads');
+const uploadsDirectory = path.join(__dirname, "./../",'uploads');
 
 // Set up storage for multer
 const storage: StorageEngine = multer.diskStorage({
