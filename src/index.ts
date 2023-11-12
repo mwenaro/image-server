@@ -11,7 +11,8 @@ const port = process.env.PORT || 5000;
 // Allow all origins (domains)
 const corsOptions: cors.CorsOptions = {
   origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  methods: '*',
   optionsSuccessStatus: 204,
 };
 
