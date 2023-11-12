@@ -1,10 +1,22 @@
 // app.ts
 import express, { Request, Response } from "express";
 import path from "path";
+import cors from 'cors';
 import { upload, removeFile, replaceFile } from "./utils/upload";
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+
+// Allow all origins (domains)
+const corsOptions: cors.CorsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  optionsSuccessStatus: 204,
+};
+
+// Enable CORS
+app.use(cors(corsOptions));
 // Add this line to serve the uploads directory statically
 // app.use('/uploads', express.static('uploads'));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
