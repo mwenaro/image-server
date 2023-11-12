@@ -1,0 +1,16 @@
+# Node.js
+node_modules/
+
+# TypeScript
+*.tsbuildinfo
+*.js
+*.js.map
+
+# Nodemon
+.nodemon
+
+# Output directory
+/dist
+
+# Environment variables file
+.env
